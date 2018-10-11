@@ -23,7 +23,7 @@ namespace BookScanner
                 scanPage.IsScanning = false;
 
                 Device.BeginInvokeOnMainThread(async () => {
-                    Navigation.PopAsync();
+                    await Navigation.PopAsync();
                     var bookResult = await _client.GetBookByIsbnAsync(result.Text);
                     DisplayAlert("Scanned Barcode", result.Text + bookResult, "OK");
 
