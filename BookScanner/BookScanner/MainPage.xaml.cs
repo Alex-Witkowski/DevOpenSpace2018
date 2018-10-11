@@ -25,7 +25,7 @@ namespace BookScanner
                 Device.BeginInvokeOnMainThread(async () => {
                     await Navigation.PopAsync();
                     var bookResult = await _client.GetBookByIsbnAsync(result.Text);
-                    DisplayAlert(bookResult?.title ?? "Scanned Barcode", bookResult?.authors[0].name?? result.Text, "OK");
+                    DisplayAlert(bookResult?.title ?? "Scanned Barcode", bookResult?.AuthorsText ?? result.Text, "OK");
 
                 });
             };
