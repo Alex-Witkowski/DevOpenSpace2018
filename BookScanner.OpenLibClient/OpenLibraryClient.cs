@@ -16,7 +16,7 @@ namespace BookScanner.OpenLibClient
 
         public async Task<string> GetBookByIsbnAsync(string isbn)
         {
-            var result = await _httpClient.GetStringAsync($"books?bibkeys=ISBN:{isbn}&format=json").ConfigureAwait(false);
+            var result = await _httpClient.GetStringAsync($"books?bibkeys=ISBN:{isbn}&format=json&jscmd=data").ConfigureAwait(false);
             return result;
         }
     }

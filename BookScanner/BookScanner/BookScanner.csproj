@@ -13,4 +13,8 @@
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BookScanner.OpenLibClient\BookScanner.OpenLibClient.csproj" />
+  </ItemGroup>
 </Project>

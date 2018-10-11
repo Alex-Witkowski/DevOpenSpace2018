@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookScanner.OpenLibClient;
+using System;
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 
@@ -7,10 +8,12 @@ namespace BookScanner
     public partial class MainPage : ContentPage
     {
         ZXingScannerPage scanPage;
+        private OpenLibraryClient _client;
 
         public MainPage()
         {
             InitializeComponent();
+            _client = new OpenLibraryClient();
         }
 
         private async void ScanButton_Clicked(object sender, EventArgs e)
@@ -19,9 +22,11 @@ namespace BookScanner
             scanPage.OnScanResult += (result) => {
                 scanPage.IsScanning = false;
 
-                Device.BeginInvokeOnMainThread(() => {
+                Device.BeginInvokeOnMainThread(async () => {
                     Navigation.PopAsync();
-                    DisplayAlert("Scanned Barcode", result.Text, "OK");
+                    var bookResult = await _client.GetBookByIsbnAsync(result.Text);
+                    DisplayAlert("Scanned Barcode", result.Text + bookResult, "OK");
+
                 });
             };
 
