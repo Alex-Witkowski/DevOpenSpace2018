@@ -8,8 +8,18 @@
         <!-- Place new controls here -->
         <Button Text="Scan barcode" 
            HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" 
-                Clicked="ScanButton_Clicked"/>
+           VerticalOptions="Start" 
+                Clicked="ScanButton_Clicked"
+                Margin="20"/>
+        <StackLayout x:Name="BookInformationsLayout" VerticalOptions="StartAndExpand" IsVisible="False">
+            <Label Text="Title:" />
+            <Label x:Name="TitleLabel"/>
+            <Label Text="Publisher:" />
+            <Label x:Name="PublischerLbl" />
+            <Label Text="Authors:" />
+            <Label x:Name="AuthorsLbl" />
+            <Image x:Name="Image" />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

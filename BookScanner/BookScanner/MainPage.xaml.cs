@@ -1,5 +1,6 @@
 ﻿using BookScanner.OpenLibClient;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 using ZXing;
 using ZXing.Net.Mobile.Forms;
@@ -32,7 +33,19 @@ namespace BookScanner
             {
                 await Navigation.PopAsync();
                 var bookResult = await _client.GetBookByIsbnAsync(result.Text);
-                DisplayAlert(bookResult?.title ?? "Scanned Barcode", bookResult?.AuthorsText ?? result.Text, "OK");
+                if(bookResult == null)
+                {
+                    BookInformationsLayout.IsVisible = false;
+                    DisplayAlert("No book found for scanned barcode", result.Text, "OK");
+                    return;
+                }
+
+                BookInformationsLayout.IsVisible = true;
+                TitleLabel.Text = bookResult.title;
+                PublischerLbl.Text = bookResult.publishers?.FirstOrDefault()?.name;
+                AuthorsLbl.Text = bookResult.AuthorsText;
+                if (bookResult.cover != null)
+                    Image.Source = ImageSource.FromUri(new Uri(bookResult.cover.large));
 
             });
         }
