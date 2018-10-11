@@ -16,6 +16,7 @@ namespace BookScanner
         {
             InitializeComponent();
             _client = new OpenLibraryClient();
+            Title = "Devspace Bookscanner";
         }
 
         private async void ScanButton_Clicked(object sender, EventArgs e)
@@ -31,11 +32,15 @@ namespace BookScanner
 
             Device.BeginInvokeOnMainThread(async () =>
             {
+                ActivityIndicator.IsVisible = true;
+                BookInformationsLayout.IsVisible = false;
                 await Navigation.PopAsync();
                 var bookResult = await _client.GetBookByIsbnAsync(result.Text);
-                if(bookResult == null)
+
+                ActivityIndicator.IsVisible = false;
+
+                if (bookResult == null)
                 {
-                    BookInformationsLayout.IsVisible = false;
                     DisplayAlert("No book found for scanned barcode", result.Text, "OK");
                     return;
                 }

@@ -11,6 +11,7 @@
            VerticalOptions="Start" 
                 Clicked="ScanButton_Clicked"
                 Margin="20"/>
+        <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" IsVisible="False"/>
         <StackLayout x:Name="BookInformationsLayout" VerticalOptions="StartAndExpand" IsVisible="False">
             <Label Text="Title:" />
             <Label x:Name="TitleLabel"/>
